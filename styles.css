@@ -130,6 +130,11 @@ svg {
   flex-shrink: 0;
 }
 
+/* Ensure the [hidden] attribute always wins over class-based display rules */
+[hidden] {
+  display: none !important;
+}
+
 ::selection {
   background: var(--accent-soft);
   color: var(--text-primary);
@@ -510,7 +515,8 @@ svg {
   font-size: clamp(2.4rem, 5.5vw, 4.2rem);
   font-weight: 800;
   letter-spacing: -0.035em;
-  line-height: 1.05;
+  line-height: 1.15;
+  padding-bottom: 0.12em;
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.55) 100%);
   -webkit-background-clip: text;
   background-clip: text;
