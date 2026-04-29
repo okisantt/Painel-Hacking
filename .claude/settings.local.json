@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(node --check \"D:/Painel Hacking/app.js\")",
+      "Bash(xargs -r kill echo \"--- done ---\")",
+      "Bash(python -m http.server 8765)",
+      "Bash(jobs -p)",
+      "Bash(echo \"PID: $\\(jobs -p\\)\")"
+    ]
+  }
+}

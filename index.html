@@ -2,12 +2,12 @@
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Roadmap interativo de hacking ético baseado no Guia de Cyber Security."
-    >
-    <title>Painel Hacking Ético</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="Roadmap interativo de hacking ético baseado no Guia de Cyber Security.">
+    <title>Painel Hacking Ético — Roadmap de Cibersegurança</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script defer src="data/guideData.js"></script>
     <script defer src="app.js"></script>
@@ -15,133 +15,228 @@
   <body>
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 
+    <!-- Decorative background -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <!-- Mobile top bar -->
+    <header class="topbar" role="banner">
+      <a href="#" class="topbar-brand" data-view="dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4Z"/></svg>
+        </span>
+        <span class="brand-text">
+          <strong>Painel Hacking</strong>
+          <small>Guia Ético</small>
+        </span>
+      </a>
+      <button class="topbar-action" type="button" id="topbarSaved" aria-label="Ver salvos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 17-6.2 3.6 1.6-7-5.4-4.7 7-.6L12 2l3 6.3 7 .6-5.4 4.7 1.6 7Z"/></svg>
+      </button>
+    </header>
+
     <div class="app-container">
-      <aside class="sidebar">
+      <!-- Desktop sidebar -->
+      <aside class="sidebar" aria-label="Navegação principal">
         <div class="sidebar-header">
           <div class="brand">
-            <div class="brand-mark">H</div>
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4Z"/></svg>
+            </span>
             <div class="brand-text">
               <strong>Painel Hacking</strong>
               <small>Guia Ético</small>
             </div>
           </div>
         </div>
-        
-        <nav class="main-nav">
-          <button class="nav-item active" data-view="dashboard">
-            <span class="icon">📊</span>
-            <span>Dashboard</span>
+
+        <nav class="main-nav" aria-label="Seções">
+          <button class="nav-item is-active" type="button" data-view="dashboard">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+            </span>
+            <span class="nav-label">Dashboard</span>
           </button>
-          <button class="nav-item" data-view="roadmap">
-            <span class="icon">🛣️</span>
-            <span>Trilha</span>
+          <button class="nav-item" type="button" data-view="roadmap">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h4a4 4 0 0 0 4-4V8"/></svg>
+            </span>
+            <span class="nav-label">Trilha</span>
           </button>
-          <button class="nav-item" data-view="library">
-            <span class="icon">📚</span>
-            <span>Biblioteca</span>
+          <button class="nav-item" type="button" data-view="library">
+            <span class="nav-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+            </span>
+            <span class="nav-label">Biblioteca</span>
           </button>
         </nav>
 
         <div class="sidebar-footer">
           <a href="https://github.com/arthurspk/guiadecybersecurity" target="_blank" rel="noreferrer" class="github-link">
-            <span>Ver no GitHub</span>
-            <span class="icon">↗</span>
+            <span class="github-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.1.78-.25.78-.55 0-.27-.01-.99-.01-1.94-3.2.69-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.4-5.25 5.68.41.36.78 1.06.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.66.79.55 4.56-1.52 7.85-5.83 7.85-10.91C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            </span>
+            <span class="github-label">Ver no GitHub</span>
+            <span class="github-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </span>
           </a>
         </div>
       </aside>
 
       <main id="main-content" class="content-area">
         <!-- Dashboard View -->
-        <section id="view-dashboard" class="view active">
+        <section id="view-dashboard" class="view is-active" aria-labelledby="hero-title">
           <div class="hero">
-            <div class="hero-content">
-              <p class="eyebrow">Hacking Ético & Cibersegurança</p>
-              <h1>Domine o Caos Digital.</h1>
-              <p>Um roadmap estruturado para sair do zero e se tornar um profissional de segurança ofensiva com ética e método.</p>
-              <div class="hero-actions">
-                <button class="btn btn-primary" onclick="switchView('roadmap')">Ver Trilha</button>
-                <button class="btn btn-secondary" onclick="switchView('library')">Explorar Biblioteca</button>
-              </div>
+            <span class="eyebrow">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Hacking Ético & Cibersegurança
+            </span>
+            <h1 id="hero-title">Domine o caos digital<span class="hero-dot">.</span></h1>
+            <p class="hero-lead">Um roadmap estruturado para sair do zero e se tornar um profissional de segurança ofensiva — com ética, método e recursos validados.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" type="button" data-view="roadmap">
+                <span>Ver trilha</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+              </button>
+              <button class="btn btn-ghost" type="button" data-view="library">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <span>Explorar biblioteca</span>
+              </button>
             </div>
           </div>
 
-          <div class="metrics-grid" id="metrics"></div>
-          
+          <div class="metrics-grid" id="metrics" aria-label="Métricas do guia"></div>
+
           <div class="featured-section">
             <div class="section-header">
-              <h2>Recursos em Destaque</h2>
-              <p>Ferramentas e plataformas essenciais recomendadas pelo guia.</p>
+              <div>
+                <h2>Recursos em destaque</h2>
+                <p>Plataformas essenciais recomendadas pelo guia.</p>
+              </div>
+              <button class="btn btn-link" type="button" data-view="library">
+                <span>Ver todos</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+              </button>
             </div>
             <div class="featured-grid" id="featuredGrid"></div>
           </div>
         </section>
 
         <!-- Roadmap View -->
-        <section id="view-roadmap" class="view">
+        <section id="view-roadmap" class="view" aria-labelledby="roadmap-title">
           <header class="view-header">
-            <h2>Sequência Recomendada</h2>
-            <p>Siga esta ordem para uma progressão lógica de aprendizado.</p>
+            <span class="eyebrow">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Trilha
+            </span>
+            <h2 id="roadmap-title">Sequência recomendada</h2>
+            <p>Selecione um estágio para filtrar a biblioteca pelos recursos correspondentes.</p>
           </header>
           <div class="stage-rail" id="stageRail" role="list"></div>
         </section>
 
         <!-- Library View -->
-        <section id="view-library" class="view">
-          <header class="library-header">
-            <div class="search-container">
-              <div class="search-bar">
-                <span class="icon">⌕</span>
-                <input id="searchInput" type="search" placeholder="Buscar por tema, ferramenta ou domínio..." autocomplete="off">
-              </div>
-              
-              <div class="filter-controls">
-                <div class="filter-group">
-                  <label for="categorySelect">Tipo</label>
-                  <select id="categorySelect"></select>
-                </div>
-                <div class="filter-group">
-                  <label for="sortSelect">Ordem</label>
-                  <select id="sortSelect">
-                    <option value="curated">Relevância</option>
-                    <option value="title">A-Z</option>
-                    <option value="section">Seção Original</option>
-                    <option value="domain">Domínio</option>
-                  </select>
-                </div>
-                <button class="icon-button" id="savedOnly" title="Ver Salvos">
-                  <span class="icon">★</span>
-                </button>
-                <button class="icon-button" id="clearFilters" title="Limpar Filtros">
-                  <span class="icon">×</span>
-                </button>
-              </div>
+        <section id="view-library" class="view" aria-labelledby="library-title">
+          <header class="view-header">
+            <span class="eyebrow">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              Biblioteca
+            </span>
+            <h2 id="library-title">Recursos do guia</h2>
+            <p>Filtre por seção, tipo ou busca livre. Use as estrelas para salvar favoritos.</p>
+          </header>
+
+          <div class="library-toolbar">
+            <div class="search-bar">
+              <span class="search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              </span>
+              <input id="searchInput" type="search" placeholder="Buscar por tema, ferramenta ou domínio…" autocomplete="off" aria-label="Buscar recursos">
+              <button type="button" class="search-clear" id="searchClear" aria-label="Limpar busca" hidden>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </button>
             </div>
 
-            <div class="library-subnav">
-              <aside class="section-tabs-container">
-                <div class="tabs-scroll" id="sectionTabs"></div>
-              </aside>
+            <button class="filter-toggle" type="button" id="filterToggle" aria-expanded="false" aria-controls="filterPanel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M7 12h10"/><path d="M11 18h2"/></svg>
+              <span>Filtros</span>
+              <span class="filter-count" id="filterCount" hidden>0</span>
+            </button>
+          </div>
+
+          <div class="filter-panel" id="filterPanel" hidden>
+            <div class="filter-group">
+              <label for="categorySelect">Tipo de recurso</label>
+              <div class="select-wrap">
+                <select id="categorySelect"></select>
+                <svg class="select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
             </div>
-          </header>
+            <div class="filter-group">
+              <label for="sortSelect">Ordenar por</label>
+              <div class="select-wrap">
+                <select id="sortSelect">
+                  <option value="curated">Relevância</option>
+                  <option value="title">A-Z</option>
+                  <option value="section">Seção original</option>
+                  <option value="domain">Domínio</option>
+                </select>
+                <svg class="select-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button class="chip-toggle" type="button" id="savedOnly" aria-pressed="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 17-6.2 3.6 1.6-7-5.4-4.7 7-.6L12 2l3 6.3 7 .6-5.4 4.7 1.6 7Z"/></svg>
+                <span>Apenas salvos</span>
+              </button>
+              <button class="chip-toggle danger" type="button" id="clearFilters">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="m19 6-1.5 14a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                <span>Limpar</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="section-tabs" role="tablist" aria-label="Seções do guia">
+            <button class="tabs-arrow tabs-arrow--prev" type="button" id="tabsPrev" aria-label="Rolar para esquerda" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+            </button>
+            <div class="tabs-viewport">
+              <div class="tabs-fade tabs-fade--left" aria-hidden="true"></div>
+              <div class="tabs-scroll" id="sectionTabs" role="tablist"></div>
+              <div class="tabs-fade tabs-fade--right" aria-hidden="true"></div>
+            </div>
+            <button class="tabs-arrow tabs-arrow--next" type="button" id="tabsNext" aria-label="Rolar para direita" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+            </button>
+          </div>
 
           <div class="library-results">
             <div class="results-header">
-              <div id="filterSummary"></div>
-              <div id="resultLine" class="result-line"></div>
-              <button class="btn btn-sm" id="copyTrail">
+              <div class="results-meta">
+                <div id="filterSummary" class="filter-summary"></div>
+                <div id="resultLine" class="result-line"></div>
+              </div>
+              <button class="btn btn-ghost btn-sm" type="button" id="copyTrail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 <span>Copiar trilha</span>
               </button>
             </div>
 
             <div class="resource-grid" id="resourceList"></div>
-            
+
             <div class="empty-state" id="emptyState" hidden>
-              <strong>Nenhum recurso encontrado.</strong>
-              <span>Tente ajustar seus filtros ou busca.</span>
+              <div class="empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              </div>
+              <strong>Nenhum recurso encontrado</strong>
+              <span>Tente ajustar seus filtros ou termo de busca.</span>
+              <button class="btn btn-ghost btn-sm" type="button" id="emptyClear">Limpar filtros</button>
             </div>
 
-            <button class="load-more" id="loadMore" hidden>
-              Carregar mais recursos
+            <button class="load-more" id="loadMore" type="button" hidden>
+              <span>Carregar mais recursos</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
           </div>
         </section>
@@ -149,7 +244,35 @@
     </div>
 
     <footer class="app-footer">
-      <p>Dados extraídos do README público do Guia de Cyber Security.</p>
+      <p>Dados extraídos do README público do <a href="https://github.com/arthurspk/guiadecybersecurity" target="_blank" rel="noreferrer">Guia de Cyber Security</a>.</p>
     </footer>
+
+    <!-- Mobile bottom navigation -->
+    <nav class="bottom-nav" aria-label="Navegação móvel">
+      <button class="bottom-nav-item is-active" type="button" data-view="dashboard">
+        <span class="bottom-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        </span>
+        <span class="bottom-nav-label">Início</span>
+      </button>
+      <button class="bottom-nav-item" type="button" data-view="roadmap">
+        <span class="bottom-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h4a4 4 0 0 0 4-4V8"/></svg>
+        </span>
+        <span class="bottom-nav-label">Trilha</span>
+      </button>
+      <button class="bottom-nav-item" type="button" data-view="library">
+        <span class="bottom-nav-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+        </span>
+        <span class="bottom-nav-label">Biblioteca</span>
+      </button>
+    </nav>
+
+    <!-- Toast for copy feedback -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+      <span id="toastText"></span>
+    </div>
   </body>
 </html>
