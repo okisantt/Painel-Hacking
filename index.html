@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Roadmap interativo de hacking ético baseado no Guia de Cyber Security."
+    >
+    <title>Painel Hacking Ético</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="data/guideData.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="brand">
+            <div class="brand-mark">H</div>
+            <div class="brand-text">
+              <strong>Painel Hacking</strong>
+              <small>Guia Ético</small>
+            </div>
+          </div>
+        </div>
+        
+        <nav class="main-nav">
+          <button class="nav-item active" data-view="dashboard">
+            <span class="icon">📊</span>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-view="roadmap">
+            <span class="icon">🛣️</span>
+            <span>Trilha</span>
+          </button>
+          <button class="nav-item" data-view="library">
+            <span class="icon">📚</span>
+            <span>Biblioteca</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="https://github.com/arthurspk/guiadecybersecurity" target="_blank" rel="noreferrer" class="github-link">
+            <span>Ver no GitHub</span>
+            <span class="icon">↗</span>
+          </a>
+        </div>
+      </aside>
+
+      <main id="main-content" class="content-area">
+        <!-- Dashboard View -->
+        <section id="view-dashboard" class="view active">
+          <div class="hero">
+            <div class="hero-content">
+              <p class="eyebrow">Hacking Ético & Cibersegurança</p>
+              <h1>Domine o Caos Digital.</h1>
+              <p>Um roadmap estruturado para sair do zero e se tornar um profissional de segurança ofensiva com ética e método.</p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="switchView('roadmap')">Ver Trilha</button>
+                <button class="btn btn-secondary" onclick="switchView('library')">Explorar Biblioteca</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="metrics-grid" id="metrics"></div>
+          
+          <div class="featured-section">
+            <div class="section-header">
+              <h2>Recursos em Destaque</h2>
+              <p>Ferramentas e plataformas essenciais recomendadas pelo guia.</p>
+            </div>
+            <div class="featured-grid" id="featuredGrid"></div>
+          </div>
+        </section>
+
+        <!-- Roadmap View -->
+        <section id="view-roadmap" class="view">
+          <header class="view-header">
+            <h2>Sequência Recomendada</h2>
+            <p>Siga esta ordem para uma progressão lógica de aprendizado.</p>
+          </header>
+          <div class="stage-rail" id="stageRail" role="list"></div>
+        </section>
+
+        <!-- Library View -->
+        <section id="view-library" class="view">
+          <header class="library-header">
+            <div class="search-container">
+              <div class="search-bar">
+                <span class="icon">⌕</span>
+                <input id="searchInput" type="search" placeholder="Buscar por tema, ferramenta ou domínio..." autocomplete="off">
+              </div>
+              
+              <div class="filter-controls">
+                <div class="filter-group">
+                  <label for="categorySelect">Tipo</label>
+                  <select id="categorySelect"></select>
+                </div>
+                <div class="filter-group">
+                  <label for="sortSelect">Ordem</label>
+                  <select id="sortSelect">
+                    <option value="curated">Relevância</option>
+                    <option value="title">A-Z</option>
+                    <option value="section">Seção Original</option>
+                    <option value="domain">Domínio</option>
+                  </select>
+                </div>
+                <button class="icon-button" id="savedOnly" title="Ver Salvos">
+                  <span class="icon">★</span>
+                </button>
+                <button class="icon-button" id="clearFilters" title="Limpar Filtros">
+                  <span class="icon">×</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="library-subnav">
+              <aside class="section-tabs-container">
+                <div class="tabs-scroll" id="sectionTabs"></div>
+              </aside>
+            </div>
+          </header>
+
+          <div class="library-results">
+            <div class="results-header">
+              <div id="filterSummary"></div>
+              <div id="resultLine" class="result-line"></div>
+              <button class="btn btn-sm" id="copyTrail">
+                <span>Copiar trilha</span>
+              </button>
+            </div>
+
+            <div class="resource-grid" id="resourceList"></div>
+            
+            <div class="empty-state" id="emptyState" hidden>
+              <strong>Nenhum recurso encontrado.</strong>
+              <span>Tente ajustar seus filtros ou busca.</span>
+            </div>
+
+            <button class="load-more" id="loadMore" hidden>
+              Carregar mais recursos
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="app-footer">
+      <p>Dados extraídos do README público do Guia de Cyber Security.</p>
+    </footer>
+  </body>
+</html>

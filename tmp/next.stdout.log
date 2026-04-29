@@ -1,0 +1,12 @@
+
+> painel-hacking-roadmap@1.0.0 dev
+> next dev --webpack
+
+▲ Next.js 16.2.4 (webpack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.103:3000
+✓ Ready in 772ms
+
+○ Compiling / ...
+ GET / 200 in 4.8s (next.js: 4.5s, application-code: 307ms)
+ GET / 200 in 150ms (next.js: 14ms, application-code: 136ms)
