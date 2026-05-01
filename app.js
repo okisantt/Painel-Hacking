@@ -151,6 +151,10 @@
     filterPanel: document.querySelector('#filterPanel'),
     filterCount: document.querySelector('#filterCount'),
     topbarSaved: document.querySelector('#topbarSaved'),
+    tabsMenuBtn: document.querySelector('#tabsMenuBtn'),
+    sectionsModal: document.querySelector('#sectionsModal'),
+    sectionsModalGrid: document.querySelector('#sectionsModalGrid'),
+    sectionsModalSearch: document.querySelector('#sectionsModalSearch'),
     toast: document.querySelector('#toast'),
     toastText: document.querySelector('#toastText'),
     navItems: document.querySelectorAll('[data-view]'),
@@ -481,6 +485,100 @@
         }
       }, { passive: false });
     }
+
+    // "Todas as seções" modal
+    if (els.tabsMenuBtn) {
+      els.tabsMenuBtn.addEventListener('click', openSectionsModal);
+    }
+    if (els.sectionsModal) {
+      els.sectionsModal.addEventListener('click', (event) => {
+        if (event.target.closest('[data-close]')) closeSectionsModal();
+      });
+      els.sectionsModalGrid.addEventListener('click', (event) => {
+        const card = event.target.closest('[data-section-pick]');
+        if (!card) return;
+        state.section = card.dataset.sectionPick;
+        resetVisibleLimit();
+        renderAll();
+        switchView('library');
+        closeSectionsModal();
+        requestAnimationFrame(() => {
+          const active = els.sectionTabs.querySelector('.tab-button.is-active');
+          if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+      });
+      els.sectionsModalSearch.addEventListener('input', (event) => {
+        renderSectionsModalGrid(event.target.value);
+      });
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && els.sectionsModal && !els.sectionsModal.hidden) {
+        closeSectionsModal();
+      }
+    });
+  }
+
+  function openSectionsModal() {
+    if (!els.sectionsModal) return;
+    renderSectionsModalGrid('');
+    els.sectionsModal.hidden = false;
+    els.tabsMenuBtn?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      els.sectionsModalSearch?.focus({ preventScroll: true });
+    });
+  }
+
+  function closeSectionsModal() {
+    if (!els.sectionsModal) return;
+    els.sectionsModal.hidden = true;
+    els.tabsMenuBtn?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (els.sectionsModalSearch) els.sectionsModalSearch.value = '';
+  }
+
+  function renderSectionsModalGrid(query) {
+    if (!els.sectionsModalGrid) return;
+    const q = normalize(query || '');
+    const items = [
+      {
+        id: 'all',
+        title: 'Tudo',
+        count: resources.length,
+        icon: icons.grid,
+      },
+      ...sections.map((section) => ({
+        id: section.id,
+        title: section.title,
+        count: section.resources.length,
+        icon: iconForSection(section),
+      })),
+    ];
+
+    const filtered = q
+      ? items.filter((item) => normalize(item.title).includes(q))
+      : items;
+
+    if (filtered.length === 0) {
+      els.sectionsModalGrid.innerHTML = '<div class="sections-modal-empty">Nenhuma seção encontrada.</div>';
+      return;
+    }
+
+    els.sectionsModalGrid.innerHTML = filtered
+      .map((item) => {
+        const active = item.id === state.section ? ' is-active' : '';
+        return `
+          <button class="sections-modal-card${active}" type="button" role="listitem" data-section-pick="${escapeAttr(item.id)}">
+            <span class="sections-modal-card-icon" aria-hidden="true">${item.icon}</span>
+            <span class="sections-modal-card-body">
+              <span class="sections-modal-card-title">${escapeHtml(item.title)}</span>
+              <span class="sections-modal-card-meta">${item.count.toLocaleString('pt-BR')} ${item.count === 1 ? 'recurso' : 'recursos'}</span>
+            </span>
+          </button>
+        `;
+      })
+      .join('');
   }
 
   function openFilterPanel() {
