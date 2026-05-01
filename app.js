@@ -633,12 +633,15 @@
 
     const prev = document.querySelector('#tabsPrev');
     const next = document.querySelector('#tabsNext');
-    if (prev) prev.hidden = !hasOverflow;
-    if (next) next.hidden = !hasOverflow;
-    if (prev) prev.disabled = atStart;
-    if (next) next.disabled = atEnd;
-    if (prev) prev.style.opacity = atStart ? '0.4' : '1';
-    if (next) next.style.opacity = atEnd ? '0.4' : '1';
+    // Setas sempre visíveis — desabilitadas quando não há para onde rolar
+    if (prev) prev.hidden = false;
+    if (next) next.hidden = false;
+    const disablePrev = !hasOverflow || atStart;
+    const disableNext = !hasOverflow || atEnd;
+    if (prev) prev.disabled = disablePrev;
+    if (next) next.disabled = disableNext;
+    if (prev) prev.style.opacity = disablePrev ? '0.4' : '1';
+    if (next) next.style.opacity = disableNext ? '0.4' : '1';
   }
 
   function renderFeatured() {
