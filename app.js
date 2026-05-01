@@ -464,6 +464,13 @@
       els.sectionTabs.addEventListener('scroll', updateTabsOverflow, { passive: true });
     }
     window.addEventListener('resize', updateTabsOverflow);
+    window.addEventListener('load', scheduleTabsOverflowUpdate);
+
+    // ResizeObserver pega mudanças de largura assim que o layout assenta (fontes, ícones)
+    if (typeof ResizeObserver !== 'undefined' && els.sectionTabs) {
+      const ro = new ResizeObserver(() => updateTabsOverflow());
+      ro.observe(els.sectionTabs);
+    }
 
     // Mouse wheel → horizontal scroll on the tabs row (UX nicety)
     if (els.sectionTabs) {
@@ -616,7 +623,23 @@
     ];
 
     els.sectionTabs.innerHTML = tabs.join('');
-    requestAnimationFrame(updateTabsOverflow);
+    scheduleTabsOverflowUpdate();
+  }
+
+  // O cálculo de overflow depende do layout ter assentado (fontes, ícones, paddings).
+  // Em first paint o scrollWidth pode vir igual ao clientWidth e desabilita as setas.
+  // Disparamos várias vezes em momentos diferentes para garantir que a 1ª render acerte.
+  function scheduleTabsOverflowUpdate() {
+    requestAnimationFrame(() => {
+      updateTabsOverflow();
+      requestAnimationFrame(updateTabsOverflow);
+    });
+    setTimeout(updateTabsOverflow, 50);
+    setTimeout(updateTabsOverflow, 200);
+    setTimeout(updateTabsOverflow, 600);
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(updateTabsOverflow).catch(() => {});
+    }
   }
 
   function updateTabsOverflow() {
